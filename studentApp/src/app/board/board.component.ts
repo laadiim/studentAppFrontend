@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { SquareComponent } from "../square/square.component";
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [],
+  imports: [SquareComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
 export class BoardComponent implements OnInit {
   squares: any[];
   xIsNext: boolean;
-  winner: string;
+  winner: string|null;
 
-  constructor(){}
+  constructor(){
+    this.squares = Array(9).fill(null);
+    this.winner = null;
+    this.xIsNext = true;
+  }
 
   ngOnInit(): void {
     this.newGame();
@@ -31,6 +36,7 @@ export class BoardComponent implements OnInit {
     if (!this.squares[index]) {
       this.squares.splice(index, 1, this.player);
       this.xIsNext = !this.xIsNext;
+      this.winner = this.calculateWinner();
     }
   }
   calculateWinner() {
