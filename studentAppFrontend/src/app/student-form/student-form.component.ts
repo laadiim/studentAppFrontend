@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import Student from '../models/student';
 
 @Component({
   selector: 'app-student-form',
@@ -8,8 +9,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './student-form.component.scss'
 })
 export class StudentFormComponent {
-  firstname: string;
-  constructor(){
-    this.firstname = "b";
+  logValues(name: any,address: any) {
+    console.log(name.value, ':', address.value);
+    name.value = "";
+    address.value = "";
+  }
+
+  saveStudent(student: Student){
+    
   }
 }
